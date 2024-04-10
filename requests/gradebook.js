@@ -256,8 +256,16 @@ const parseYOresults = (raw) => {
     const table = document.getElementsByTagName('table').at(1);
     table.getElementsByTagName('tr').slice(1).forEach(column => {
         const [subject, date, info, grade, rejected, points] = column.childNodes.map(c => c.textContent);
+        let [pointsOverview, totalPoints] = [null, null]
 
-        const [pointsOverview, totalPoints] = points.split('=').map(n => n.trim());
+        if (points.includes('|')) {
+            [pointsOverview, totalPoints] = [
+                points,
+                points.replace('|', '=').split('=').filter(c => !c.includes('E') && !c.includes('X')).reduce((a, v) => a + (+v), 0),
+            ]
+        } else {
+            [pointsOverview, totalPoints] = points.split('=').map(n => n.trim());
+        }
 
         result.push({
             subject: {
