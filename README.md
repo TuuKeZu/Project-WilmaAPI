@@ -10,9 +10,10 @@ The basic compile checklist however is:
 - teacher-mapping in database
 - Google-project with Calendar-api enabled and configured
 - following configuration files
-    - `database/secret.json` that contains signature for jwt-session tokens, database conectiomn details, as well as api keys
+    - `secret.json` that contains signature for jwt-session tokens, database conectiomn details, as well as api keys
+    - `config.json` that contains the port for the express-api
     - `google/credentials.json` that contains your Google-projects credentials and scopes
-    - `src/config.json` that contains the port for the express-api
+        - `google/token.json` can be generated with `util/auth-google.js`
  
 # Documentation
 > At this point, just contact me and I'll provide all the necessary details for how to use the API, and it's constantly changing and broken endpoints
@@ -55,4 +56,10 @@ The basic compile checklist however is:
 - List your upcoming exams (Tentit)
 - List your forms (Lomakkeet)
 
+## Docker container
+
+Generate and run docker container
+```bash
+docker run --rm --mount type=bind,source="$(pwd)"/config.json,target=/otawilma/config.json --mount type=bind,source="$(pwd)"/secret.json,target=/otawilma/secret.json --mount type=bind,source="$(pwd)"/google/,target=/otawilma/google $(docker build . -q)
+```
 

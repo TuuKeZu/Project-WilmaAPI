@@ -20,14 +20,14 @@ const { authorize } = require('./google/authorize');
 const limiter = require('./routers/rate-limit');
 
 
-const { port } = require('./config.json');
+const { port } = require('../config.json');
 
 const app = express();
 const PORT = process.env.PORT || port;
 
 app.use(express.json());
 app.use(responseTime());
-app.use(express.static('public'))
+app.use(express.static('../public'))
 
 app.use(cors());
 app.use('/api/', login, limiter.standard);

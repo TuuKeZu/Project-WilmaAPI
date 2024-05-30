@@ -2,7 +2,7 @@
     "name": "project-wima-api",
     "version": "0.9.1",
     "description": "",
-    "main": "main.js",
+    "main": "src/main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },

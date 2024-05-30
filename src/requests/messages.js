@@ -3,7 +3,7 @@ const request = require('request');
 
 const { messages } = require('./responses');
 
-const announcements = require('../static/announcements/OtaniemenLukio.json');
+const announcements = require('../../static/announcements/OtaniemenLukio.json');
 
 const sendMessage = (Wilma2SID, studentID, receiverType, receiver, subject, content) => {
     const receiverTypes = {

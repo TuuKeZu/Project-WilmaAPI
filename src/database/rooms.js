@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const { user, password, host, port, apiKey } = require('./secret.json');
+const { user, password, host, port, apiKey } = require('../../secret.json');
 const account = require('../account/account-manager');
 
 const url = `mongodb://${user}:${password}@${host}:${port}/?authMechanism=DEFAULT`;

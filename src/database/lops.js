@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const { user, password, host, port, apiKey } = require('./secret.json');
+const { user, password, host, port, apiKey } = require('../../secret.json');
 const shortid = require('shortid');
 const account = require('../account/account-manager');
 

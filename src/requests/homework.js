@@ -1,5 +1,5 @@
 const request = require('request');
-const { homework } = require('../requests/responses');
+const { homework } = require('./responses');
 const { lops } = require('../database/lops');
 
 

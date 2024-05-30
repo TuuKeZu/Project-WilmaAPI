@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { signature } = require('./secret.json');
+const { signature } = require('../../secret.json');
 
 const signToken = (payload = {}) => {
     return jwt.sign(payload, signature, { });

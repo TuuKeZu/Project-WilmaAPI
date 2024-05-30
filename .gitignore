@@ -1,11 +1,6 @@
 #node_modules
 node_modules
 
-#package-lock
-package-lock.json
-
-# config
-static/config
 
 # tools used to setup static data for database
 tools.js
@@ -15,10 +10,11 @@ database/secret.json
 
 #config
 config.json
+secret.json
+google
 
 #whitelist
-account/whitelist.json
+src/account/whitelist.json
 
 #google credentials
-google/credentials.json
-google/token.json
+google/
