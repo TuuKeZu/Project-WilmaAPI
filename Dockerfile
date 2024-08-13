@@ -3,7 +3,7 @@ ARG NODE_VERSION=18.0.0
 
 FROM node:${NODE_VERSION}-alpine
 
-ENV NODE_ENV production
+ARG NODE_ENV production
 
 WORKDIR /otawilma
 

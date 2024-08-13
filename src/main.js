@@ -15,7 +15,7 @@ const homework = require('./routers/homework');
 const rooms = require('./routers/rooms');
 const absences = require('./routers/absences');
 
-const { authorize } = require('./google/authorize');
+const { authorize } = require('../google/authorize');
 
 const limiter = require('./routers/rate-limit');
 

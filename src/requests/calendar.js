@@ -1,4 +1,4 @@
-const { authorize } = require('../google/authorize');
+const { authorize } = require('../../google/authorize');
 const { google } = require('googleapis');
 
 const SCHOOL_CALENDAR_ID = 'edu.espoo.fi_eesj9p9mldus3sdabj39m306gg@group.calendar.google.com';
