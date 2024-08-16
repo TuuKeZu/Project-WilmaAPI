@@ -49,7 +49,7 @@ const Login = (login = { Username: String, Password: String, SessionID: String, 
                 'SESSIONID': login.SessionID,
             }
         };
-
+        
         request(options, async function (error, response) {
             if (error) return reject({ err: 'Error occured while trying to reach "https://espoo.inschool.fi/login/"', status: 503 });
             if (response.statusCode == 303) {
@@ -110,7 +110,7 @@ const StartSession = async (login = { Username: String, Password: String, Curren
                         return resolve({ token: token, reset: true });
                     })
                     .catch(err => {
-                        return reject(err);
+                        return reject({ err: "Failed to generate jwt token", status: 500 });
                     })
 
             }).catch(err => {
