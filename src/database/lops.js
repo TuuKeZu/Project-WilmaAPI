@@ -12,7 +12,7 @@ const getCourseById = (lops, id) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             const query = { code: id }
 
@@ -36,7 +36,7 @@ const getCourseType = (lops, id) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             const query = { code: id }
 
@@ -71,7 +71,7 @@ const getCourseList = (lops) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             const projection = {
                 "_id": 0,

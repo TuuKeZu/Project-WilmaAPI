@@ -11,7 +11,7 @@ const cacheRoom = (room) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             // TODO use these later to see weather room is occupied
             const currentDate = (new Date).toLocaleDateString('Fi-fi', { day: '2-digit', month: '2-digit', year: 'numeric' });
@@ -53,7 +53,7 @@ const getCachedRoom = (id, date = new Date) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
             const queryDate = date.toLocaleDateString('Fi-fi', { day: '2-digit', month: '2-digit', year: 'numeric' }).replaceAll('.', '-');
 
             const query = {

@@ -12,7 +12,7 @@ const getTeacherList = () => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             const projection = {
                 "_id": 0,
@@ -47,7 +47,7 @@ const getTeacherByName = (name) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             const query = { name: name }
 
@@ -70,7 +70,7 @@ const getTeacherById = (id) => {
         MongoClient.connect(url, (err, database) => {
             if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-            const db = database.db('Wilma');
+            const db = database.db('wilma');
 
             const query = { hash: id }
 
@@ -99,7 +99,7 @@ const rateTeacher = (r) => {
                 MongoClient.connect(url, (err, database) => {
                     if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-                    const db = database.db('Wilma');
+                    const db = database.db('wilma');
                     const query = { name: r['teacher'] }
 
                     const id = shortid.generate();
@@ -186,7 +186,7 @@ const deleteComment = (hash, id, secret) => {
                 MongoClient.connect(url, (err, database) => {
                     if (err) return reject({ err: 'Failed to connect to database', status: 500 });
 
-                    const db = database.db('Wilma');
+                    const db = database.db('wilma');
 
                     const query = { hash: hash }
 
