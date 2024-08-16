@@ -56,8 +56,8 @@ const getScheduleByWeek = (auth, date) => {
 
             await fetchSchedule(auth.Wilma2SID, auth.StudentID, dateTime)
                 .then(schedule => {
-                    dateTimes = [...dateTimes, ...schedule.Schedule];
-                    exams = [...exams, ...schedule.Exams];
+                    dateTimes = [...dateTimes, ...schedule.Schedule ?? []];
+                    exams = [...exams, ...schedule.Exams ?? []];
                 })
                 .catch(err => {
                     return reject(err);
@@ -138,7 +138,7 @@ const parseSchedule = (raw, dateTimes, number, exams, events, week) => {
             };
         }
 
-        raw.forEach(hour => {
+        (raw ?? []).forEach(hour => {
             if (hour.DateArray.includes(d)) {
 
                 const exam = exams.find(e => e.Date == `${dateTime.getDate()}.${dateTime.getMonth() + 1}.${dateTime.getFullYear()}`);
