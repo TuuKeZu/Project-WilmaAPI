@@ -3,7 +3,7 @@ const { user, password, host, port, apiKey } = require('../../secret.json');
 const shortid = require('shortid');
 const account = require('../account/account-manager');
 
-const url = `mongodb://${user}:${password}@${host}:${port}/?authMechanism=DEFAULT`;
+const url = `mongodb://${user}:${password}@${host}:${port}/wilma?authMechanism=DEFAULT`;
 //const url = `mongodb://localhost:27020/mydb`;
 
 const getCourseById = (lops, id) => {
