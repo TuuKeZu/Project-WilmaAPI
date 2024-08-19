@@ -27,7 +27,7 @@ const PORT = process.env.PORT || port;
 
 app.use(express.json());
 app.use(responseTime());
-app.use(express.static('../public'))
+app.use('/public', express.static('./public'));
 
 app.use(cors());
 app.use('/api/', login, limiter.standard);
