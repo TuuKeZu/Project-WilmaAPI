@@ -6,7 +6,6 @@ const { grades } = require('../requests/responses');
 
 const getGradeBook = (auth, limit, filter) => {
     return new Promise((resolve, reject) => {
-        console.log(auth)
         if (auth.isTeacher) {
             console.log("teacher")
             return resolve({})
@@ -48,6 +47,10 @@ const getGradeBook = (auth, limit, filter) => {
 
 const getYOresults = (auth) => {
     return new Promise((resolve, reject) => {
+        if (auth.isTeacher) {
+            console.log("teacher")
+            return resolve({})
+        }
         var options = {
             'method': 'GET',
             'url': `https://espoo.inschool.fi/forms/49`,
