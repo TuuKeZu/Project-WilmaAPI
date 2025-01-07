@@ -6,7 +6,12 @@ const { grades } = require('../requests/responses');
 
 const getGradeBook = (auth, limit, filter) => {
     return new Promise((resolve, reject) => {
-        var options = {
+        console.log(auth)
+        if (auth.isTeacher) {
+            return resolve({})
+        }
+
+        const options = {
             'method': 'GET',
             'url': `https://espoo.inschool.fi/choices?view=gradebook`,
             'headers': {

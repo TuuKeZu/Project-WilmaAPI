@@ -86,7 +86,8 @@ const generateStudentID = (Wilma2SID) => {
 
             account.validateAccountGetStudentID(response)
                 .then(studentID => {
-                    return resolve(studentID);
+                    const teacher = utility.parsers.parseStudentId(studentID);
+                    return resolve([studentID, teacher]);
                 })
                 .catch(err => {
                     return reject(err);
@@ -105,8 +106,8 @@ const StartSession = async (login = { Username: String, Password: String, Curren
                 Wilma2LoginID: details.raw, // You gotta be fucking kidding me
             }).then(session => {
                 generateStudentID(session.value[0])
-                    .then(studentID => {
-                        const token = authentication.signToken({ Wilma2SID: session.value[0], StudentID: studentID, username: login.Username.toLowerCase() })
+                    .then(([studentID, teacher]) => {
+                        const token = authentication.signToken({ Wilma2SID: session.value[0], StudentID: studentID, username: login.Username.toLowerCase(), isTeacher: teacher })
                         return resolve({ token: token, reset: true });
                     })
                     .catch(err => {

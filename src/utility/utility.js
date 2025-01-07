@@ -58,6 +58,10 @@ const parseStudent = (raw) => {
     });
 }
 
+const parseStudentId = (studentId) => {
+    return studentId.split(':')[0] != 'student'
+}
+
 const parseTitle = (raw) => {
     return new Promise((resolve, reject) => {
         try {
@@ -92,6 +96,7 @@ module.exports = {
     parsers: {
         parseStudent,
         parseTitle,
-        parseName
+        parseName,
+        parseStudentId
     }
 }
