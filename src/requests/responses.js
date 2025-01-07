@@ -88,6 +88,24 @@ const validateMessageGetByID = (res) => {
     });
 }
 
+
+const validateMessageUnread = (res) => {
+    const disallowed = ['Käyttö estetty - Wilma']
+    return new Promise((resolve, reject) => {
+
+
+        switch (res.statusCode) {
+            case 302:
+                return resolve(true);
+            case 403:
+                return reject({ err: "Invalid credentials (StudentID)", message: res.statusCode, status: 401 });
+            default:
+                return reject({ err: "Wilma responded with an unknown statuscode", message: res.statusCode, status: 501 });
+        }
+
+    });
+}
+
 const validateAbsencesGet = (res) => {
     return new Promise((resolve, reject) => {
         if (!res.body) {
@@ -268,6 +286,7 @@ module.exports = {
         validateMessagePost,
         validateMessageGet,
         validateMessageGetByID,
+        validateMessageUnread
     },
     schedule: {
         validateScheduleGet

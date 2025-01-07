@@ -89,7 +89,9 @@ router.get('/messages/:id', async (req, res) => {
     const auth = await authentication.validateToken(req, res);
     if (!auth) return;
 
-    getMessageByID(auth, request.id)
+    const autoUnread = req.query.autoUnread ? true : false;
+
+    getMessageByID(auth, request.id, autoUnread)
         .then(session => {
             res.json(session);
         })

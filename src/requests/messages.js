@@ -276,7 +276,7 @@ const getAnnouncements = (limit) => {
     });
 }
 
-const getMessageByID = (auth, id) => {
+const getMessageByID = (auth, id, autoUnread) => {
     return new Promise((resolve, reject) => {
 
         if (Object.keys(announcements.messages).includes(id)) return resolve([announcements.messages[id]]);
@@ -299,8 +299,48 @@ const getMessageByID = (auth, id) => {
                 .then(() => {
                     try {
                         const content = JSON.parse(response.body);
-                        const parsed = parseMessageContent(content.messages);
-                        return resolve(parsed);
+                        const parsed = parseMessageContent(content.messages, autoUnread);
+
+                        if (autoUnread) {
+                            markMessageUnread(auth, id)
+                            .then(() => {
+                                return resolve(parsed);
+                            })
+                            .catch(err => {
+                                return reject(err);
+                            })
+                        } else {
+                            return resolve(parsed);
+                        }
+                    } catch (err) {
+                        console.log(err);
+                        return reject({ err: 'Failed to parse message content', message: err, status: 500 })
+                    }
+                })
+                .catch(err => {
+                    return reject(err);
+                });
+        });
+    });
+}
+
+const markMessageUnread = (auth, id) => {
+    return new Promise((resolve, reject) => {
+        const options = {
+            'method': 'GET',
+            'url': `https://espoo.inschool.fi/messages/markunread?mid=${id}`,
+            'headers': {
+                'Cookie': `Wilma2SID=${auth.Wilma2SID}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            'followRedirect': false,
+        };
+
+        request(options, function (error, response) {
+            messages.validateMessageUnread(response)
+                .then(() => {
+                    try {
+                        return resolve({ success: true });
 
                     } catch (err) {
                         console.log(err);
@@ -384,9 +424,10 @@ const parseAppointmentList = (raw, limit) => {
 }
 
 
-const parseMessageContent = (raw) => {
+const parseMessageContent = (raw, autoUnread) => {
     return raw.map(message => {
         return {
+            autoUnread,
             fromWilma: true,
             id: message.Id,
             subject: message.Subject,
@@ -414,5 +455,6 @@ module.exports = {
     getMessageOutbox,
     getAppointments,
     getAnnouncements,
-    getMessageByID
+    getMessageByID,
+    markMessageUnread
 }
