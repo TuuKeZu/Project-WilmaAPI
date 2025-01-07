@@ -10,7 +10,6 @@ const validateToken = (req, res) => {
     return new Promise((resolve, reject) => {
         const a = ['Wilma2SID', 'StudentID', 'username', 'iat', 'isTeacher'];
         const token = req.headers.token;
-        console.log(token);
 
         if (!token) {
             res.status(401).json({ err: 'Missing authentication parameters: ["token"]', status: 401 });

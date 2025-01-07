@@ -8,6 +8,7 @@ const getGradeBook = (auth, limit, filter) => {
     return new Promise((resolve, reject) => {
         console.log(auth)
         if (auth.isTeacher) {
+            console.log("teacher")
             return resolve({})
         }
 
