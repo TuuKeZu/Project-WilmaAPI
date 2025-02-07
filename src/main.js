@@ -19,14 +19,24 @@ const { authorize } = require('../google/authorize');
 
 const limiter = require('./routers/rate-limit');
 
+const promBundle = require("express-prom-bundle");
+
 
 const { port } = require('../config.json');
+
+const metricsMiddleware = promBundle({
+    includeUp: true,
+    promClient: {
+        collectDefaultMetrics: {}
+    }
+});
 
 const app = express();
 const PORT = process.env.PORT || port;
 
 app.use(express.json());
 app.use(responseTime());
+app.use(metricsMiddleware);
 app.use('/public', express.static('./public'));
 
 app.use(cors());
